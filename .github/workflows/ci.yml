@@ -28,9 +28,13 @@ jobs:
       run: |
         pylint app/ || true
 
+    # 👇 ADICIONADO PARA RESOLVER O ERRO
+    - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=." >> $GITHUB_ENV
+
     - name: Run tests with pytest
       run: |
-        pytest -q
+        python -m pytest -q
 
     - name: Run Gitleaks secret scan
       uses: gitleaks/gitleaks-action@v2
